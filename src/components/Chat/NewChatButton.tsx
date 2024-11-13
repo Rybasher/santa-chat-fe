@@ -23,7 +23,6 @@ export const NewChatButton = () => {
     disabled={loading}
     >
       {loading ? "Loading..." : "New Chat"}
-
     </button>
   )
 }

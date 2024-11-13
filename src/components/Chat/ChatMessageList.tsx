@@ -1,4 +1,3 @@
-// components/Chat/ChatMessagesList.tsx
 "use client"
 import ChatMessage from "./ChatMessage";
 import {useSelector} from "react-redux";

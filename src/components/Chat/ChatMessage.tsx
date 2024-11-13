@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function ChatMessage({ content, sender }: { content: string; sender: string }) {
   return (
-    <div className={`flex ${sender === "user" ? "justify-end" : "justify-start"} items-center space-x-2`}>
+    <div className={`flex ${sender === "user" ? "justify-end" : "justify-start"} items-center space-x-2 mb-3`}>
       {sender === "system" && (
         <div className="rounded-full border-gray-300 border-2 p-3">
           <Image
