@@ -6,7 +6,7 @@ const SOCKET_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const useSocket = (sessionId: string) => {
   const [socket, setSocket] = useState<Socket | null>(null);
-  const {addMessage, setMessageGenerating, setSantaMessage } = useActions();
+  const {addMessage, clearSantaMessage, setMessageGenerating, setSantaMessage } = useActions();
 
   useEffect(() => {
     let accumulatedMessage = "";
@@ -20,6 +20,7 @@ export const useSocket = (sessionId: string) => {
     socketInstance.on("santa-response-start", () => {
       accumulatedMessage = "";
       setMessageGenerating(true);
+      clearSantaMessage();
     });
 
     socketInstance.on("chatResponse", (data) => {
@@ -32,13 +33,14 @@ export const useSocket = (sessionId: string) => {
     socketInstance.on("santa-response-end", () => {
       setMessageGenerating(false);
       addMessage({ sender: "system", content: accumulatedMessage });
-      setSantaMessage("")
+      accumulatedMessage = "";
+      clearSantaMessage();
     });
 
     return () => {
       socketInstance.disconnect();
     };
-  }, [addMessage, sessionId, setMessageGenerating, setSantaMessage]);
+  }, [sessionId]);
 
   const sendMessage = (message: string) => {
     if (socket) {

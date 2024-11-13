@@ -78,6 +78,9 @@ const chatSlice = createSlice({
     setSantaMessage: (state, action: PayloadAction<any>) => {
       state.santaMessage += action.payload;
     },
+    clearSantaMessage: (state) => {
+      state.santaMessage = "";
+    },
     setInitialMessage: (state, action: PayloadAction<any>) => {
       state.initialMessage = action.payload;
     }
